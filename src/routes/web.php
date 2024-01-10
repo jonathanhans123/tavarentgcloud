@@ -32,7 +32,6 @@ Route::get('/help', function () {
 });
 Route::get('closeAdmin', [AdminController::class, 'destroyadmin']);
 Route::post('logout', [LoginRegisterController::class, 'logout']);
-Route::middleware(['cekLogin'])->group(function () {
     Route::get('/', function () {
         return redirect('login');
     });
@@ -40,8 +39,6 @@ Route::middleware(['cekLogin'])->group(function () {
     Route::get('register', [LoginRegisterController::class, 'register']);
     Route::post('login', [LoginRegisterController::class, 'doLogin']);
     Route::post('register', [LoginRegisterController::class, 'doRegister']);
-});
-Route::middleware(['cekUserPenyewa'])->group(function () {
 
     Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
     Route::get('penyewa/search/{lat?}/{lng?}/{alamat?}', [PenyewaController::class, 'PenyewaSearch']);
@@ -57,18 +54,12 @@ Route::middleware(['cekUserPenyewa'])->group(function () {
     Route::get('penyewa/pembayaran',[PenyewaController::class, 'Pembayaran'])->name("pembayaran");
     Route::get("penyewa/insertpembayaran",[PenyewaController::class, 'insertPembayaran']);
     Route::get("penyewa/notifikasi",[PenyewaController::class, 'PenyewaNotifikasi']);
-});
-
-
-Route::middleware(['cekUserPenyewa'])->group(function () {
 Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
 Route::get('penyewa/search', [PenyewaController::class, 'PenyewaSearch']);
 Route::get('penyewa/favorit', [PenyewaController::class, 'PenyewaFavorit']);
 Route::get('penyewa/kossaya', [PenyewaController::class, 'PenyewaKosSaya']);
 Route::get('penyewa/chat', [PenyewaController::class, 'PenyewaChat']);
 Route::get('penyewa/profil', [PenyewaController::class, 'PenyewaProfil']);
-});
-Route::middleware(['cekUserPemilik'])->group(function () {
     Route::get('pemilik', [PemilikController::class, 'PemilikHome']);
     Route::get('pemilik/chat/{id?}', [PemilikController::class, 'PemilikChatPenyewa']);
     Route::post('pemilik/chat/{id?}', [PemilikController::class, 'sendchat']);
@@ -83,9 +74,6 @@ Route::middleware(['cekUserPemilik'])->group(function () {
     Route::post('pemilik/promo/{id}', [PemilikController::class, 'deletePromo']);
     Route::get('pemilik/penginapan/{id}', [PemilikController::class, 'PenginapanDetail']);
     Route::get('logout', [PemilikController::class, 'logoutpemilik']);
-});
-
-Route::middleware(['cekUserAdmin'])->group(function () {
     Route::get('admin', [AdminController::class, 'AdminListPenginap']);
     Route::get('admin/listpenginap', [AdminController::class, 'AdminListPenginap']);
     Route::get('admin/listpenginap/hapus/{id}', [AdminController::class, 'AdminHapusListPenginap']);
@@ -108,7 +96,6 @@ Route::middleware(['cekUserAdmin'])->group(function () {
     Route::post('admin/listnotifikasi/ubah/{id}',[AdminController::class,'AdmindoUbahNotifikasi']);
     Route::get('admin/logout',[AdminController::class,'logoutadmin']);
     Route::get('testing', [AdminController::class,'testing']);
-});
 
 Route::prefix("galeri")->group(function(){
     Route::get('upload', [GaleriController::class, "upload"]);

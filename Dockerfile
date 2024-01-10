@@ -1,7 +1,28 @@
 FROM php:8.1-fpm-alpine
 
-RUN apk add --no-cache nginx wget
+RUN apk add --no-cache \
+    nginx \
+    wget \
+    curl \
+    file \
+    gettext \
+    gettext-dev \
+    libintl \
+    icu-dev \
+    libzip-dev \
+    openssl-dev \
+    sqlite-dev
 
+RUN docker-php-ext-install \
+    curl \
+    fileinfo \
+    gettext \
+    mbstring \
+    exif \
+    mysqli \
+    pdo_mysql \
+    pdo_sqlite
+    
 RUN mkdir -p /run/nginx
 
 COPY docker/nginx.conf /etc/nginx/nginx.conf
