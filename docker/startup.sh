@@ -8,7 +8,8 @@ php-fpm -D
 
 nginx
 
-cd src
+cd /app/src
+php artisan optimize --force
 php artisan config:cache
 php artisan route:cache
-cd ..
+cd /app
