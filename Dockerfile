@@ -1,28 +1,13 @@
 FROM php:8.1-fpm-alpine
 
-RUN apk add --no-cache \
-    nginx \
-    wget \
-    curl \
-    file \
-    gettext \
-    gettext-dev \
-    libintl \
-    icu-dev \
-    libzip-dev \
-    openssl-dev \
-    sqlite-dev
+RUN apk add --no-cache nginx wget
 
-RUN docker-php-ext-install \
-    curl \
-    fileinfo \
-    gettext \
-    mbstring \
-    exif \
-    mysqli \
-    pdo_mysql \
-    pdo_sqlite
-    
+RUN apk add --no-cache --virtual .build-deps \
+        $PHPIZE_DEPS \
+        sqlite-dev \
+    && docker-php-ext-install pdo_mysql pdo_sqlite mysqli \
+    && apk del .build-deps
+
 RUN mkdir -p /run/nginx
 
 COPY docker/nginx.conf /etc/nginx/nginx.conf
