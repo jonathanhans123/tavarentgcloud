@@ -152,7 +152,7 @@ class PenyewaController extends Controller
         $param["id_penginap"] = Session::get("penyewa")->id;
         $param["id_penginapan"] = $request->id_penginapan;
 
-        
+
         return redirect()->route("pembayaran",$param);
     }
     public function Pembayaran(Request $request)

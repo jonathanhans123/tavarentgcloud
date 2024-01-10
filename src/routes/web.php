@@ -54,6 +54,7 @@ Route::post('logout', [LoginRegisterController::class, 'logout']);
     Route::get('penyewa/pembayaran',[PenyewaController::class, 'Pembayaran'])->name("pembayaran");
     Route::get("penyewa/insertpembayaran",[PenyewaController::class, 'insertPembayaran']);
     Route::get("penyewa/notifikasi",[PenyewaController::class, 'PenyewaNotifikasi']);
+
 Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
 Route::get('penyewa/search', [PenyewaController::class, 'PenyewaSearch']);
 Route::get('penyewa/favorit', [PenyewaController::class, 'PenyewaFavorit']);
