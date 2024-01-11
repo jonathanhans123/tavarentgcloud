@@ -54,13 +54,13 @@ class PenyewaController extends Controller
         $param["penginapan"] = $penginapan;
         $param["photos"] = Storage::disk('public')->files('imagesPenginapan');
         $param["java"] = "<script>start();</script>";
-        if (Session::get("penyewa")->id){
+        if (Session::get("penyewa")->id!=null){
             $param["fav"] = (int)count(Penginap::find(Session::get("penyewa")->id)
         ->Penginapan()
         ->where("penginapan.id","=",$request->id)
         ->get());
         }
-        
+
         return view("penyewa.penginapan",$param);
     }
     public function ToggleFavorit(Request $request)
