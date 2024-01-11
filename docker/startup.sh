@@ -10,6 +10,6 @@ nginx
 
 cd /app/src
 php artisan optimize --force
-php artisan config:cache
-php artisan route:cache
+php artisan config:clear
+php artisan route:clear
 cd /app
