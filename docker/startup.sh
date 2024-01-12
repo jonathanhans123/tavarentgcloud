@@ -12,4 +12,6 @@ cd /app/src
 php artisan optimize --force
 php artisan config:clear
 php artisan route:clear
+php artisan storage:link
+php artisan serve
 cd /app
